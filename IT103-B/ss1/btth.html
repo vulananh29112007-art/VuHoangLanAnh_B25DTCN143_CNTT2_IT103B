@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTTH</title>
+</head>
+
+<body>
+    <script>
+        let nameBook = prompt("Nhập tên sách: ");
+        let nameAuthor = prompt("Nhập tên tác giả: ");
+        let year = +prompt("Nhập năm xuất bản: ");
+        let price = +prompt("Nhập giá tiền: ");
+        let numberBook = +prompt("Nhập số lượng sách: ");
+
+        let afterNameBook = nameBook.trim().toUpperCase();
+        let afterNameAuthor = nameAuthor.toUpperCase();
+
+        let firstBookID = afterNameAuthor.slice(0, 3);
+        let finalBookID = Math.floor(Math.random() * 1000) + 1;
+        let BookID = `${firstBookID}${year}-${finalBookID}`;
+
+        let Bookshelf = Math.floor(Math.random() * 10) + 1;
+
+        console.log("---PHIẾU NHẬP KHO---");
+        console.log("Mã sách: " + BookID);
+        console.log("Tên sách: " + afterNameBook);
+        console.log("Tác giả: " + afterNameAuthor);
+        console.log("Năm xuất bản: " + year);
+        console.log("Tuổi sách: " + (2026 - year));
+        console.log("Tổng giá trị: " + (price * numberBook));
+        console.log("Ngăn kệ gợi ý: " + Bookshelf);
+    </script>
+</body>
+
+</html>

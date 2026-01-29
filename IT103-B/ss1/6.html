@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo mã quản lý sách</title>
+</head>
+
+<body>
+    <script>
+        let nameBook = prompt("Tên sách:");
+        let idBook = +prompt("Số thứ tự:");
+        let realBook = nameBook.trim().toLowerCase();
+        let bookCode = `LIB - ${nameBook} - ${idBook}`;
+
+        console.log("Tên scahs gốc:" + realBook);
+        console.log("Tên sách sau chuẩn hóa: " + bookCode);
+    </script>
+</body>
+
+</html>
