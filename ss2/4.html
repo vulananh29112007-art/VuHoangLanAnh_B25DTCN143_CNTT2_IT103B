@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sách theo mức độ yêu thích của người mượn</title>
+</head>
+
+<body>
+    <script>
+        let bookName = prompt("Nhập tên sách:");
+        let userName = prompt("Nhập tên bạn:");
+        let favouriteLevel = prompt("Nhập mức độ yêu thích");
+
+        if (favouriteLevel == 5 || favouriteLevel == 4) {
+            console.log("Đây là cuốn sách yêu thích của bạn, hãy đọc ngay!")
+        } else if (favouriteLevel == 3) {
+            console.log("Sách này khá ổn, có thể mượn");
+        } else if (favouriteLevel == 2 || favouriteLevel == 1) {
+            console.log("Sách này bạn có thể cân nhắc mượn lại sau");
+        } else {
+            console.log("Không hợp lệ");
+        }
+
+
+    </script>
+</body>
+
+</html>

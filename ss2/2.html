@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý số lượng sách trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let bookNumber = +prompt("Nhập số lượng sách:");
+
+        if (bookNumber >= 0 && bookNumber <= 10) {
+            console.log("Thư viện có ít sách");
+        } else if (bookNumber > 10 && bookNumber <= 20) {
+            console.log("Thư viện có số lượng sách vừa đủ");
+        } else if (bookNumber > 20) {
+            console.log("Thư viện có nhiều sách");
+        } else {
+            console.log("Không hợp lệ");
+        }
+    </script>
+</body>
+
+</html>

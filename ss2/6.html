@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang=vin">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sách và các yêu cầu mượn sách trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let bookName = prompt("Nhập tên sách:");
+        let userName = prompt("Nhập tên bạn:");
+        let bookCondition = prompt("Nhập tình trạng sách").toLowerCase;
+        let day = +prompt("Nhập số ngày mượn:");
+        let libraryCard = prompt("Bạn có thẻ thư viện không?").toLowerCase;
+
+        if (bookCondition == "có sẵn") {
+            if (libraryCard == "rồi") {
+                console.log("Chúc mừng, bạn có thể mượn sách này");
+            }
+        } else if (bookCondition == "đã mượn") {
+            if (day <= 30) {
+                if (libraryCard == "rồi") {
+                    console.log("Sách đang được mượn, vui lòng đợi đến khi trả lại");
+                } else {
+                    console.log("Bạn không thể mượn sách nếu không có thẻ thư viện");
+                }
+            }
+        } else if (bookCondition == "không có sẵn") {
+            console.log("Sách này hiện tại không có sẵn trong thư viện, bạn có thể đăng ký mượn sau");
+        } else {
+            console.log("Thông tin không hợp lệ, vui lòng nhập lại");
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thông tin sách</title>
+</head>
+
+<body>
+    <script>
+        let bookName = prompt("Nhập tên sách:");
+        let bookAuthor = prompt("Nhập tên tác giả: ");
+        let year = +prompt("Nhập năm xuất bản");
+
+        let age = +(2026 - year);
+
+        if (age == 0) {
+            console.log("Đây là sách mới");
+        } else if (age >= 1 && age <= 5) {
+            console.log("Sách khá mới");
+        } else if (age > 5) {
+            console.log("Sách đã cũ");
+        } else {
+            console.log("Sách không tồn tại");
+        }
+    </script>
+</body>
+
+</html>

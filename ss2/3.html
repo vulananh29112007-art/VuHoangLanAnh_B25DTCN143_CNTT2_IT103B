@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sách theo thể loại trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let bookName = prompt("Nhập tên sách");
+        let bookGenre = prompt("Nhập thể loại sách");
+
+        if (bookGenre == "Khoa học" || bookGenre == "Lịch sử") {
+            let bookCondition = prompt("Nhập tình trạng sách");
+            if (bookCondition == "có") {
+                console.log("Sách này có sẵn trong thư viện");
+            } else {
+                console.log("Sách đã được mượn")
+            }
+        }
+        if (bookGenre == "Văn học" || bookGenre == "Truyện") {
+            console.log("Sách này có thể đọc giải trí");
+        }
+    </script>
+</body>
+
+</html>
