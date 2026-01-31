@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý xử lý yêu cầu đặt mượn trước (reservation) trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let processedCount = 0;
+        let successCount = 0;
+        let rejectedCount = 0;
+        let pendingCount = 0;
+
+        while (true) {
+            let newReservation = prompt("Có yêu cầu đặt mượn trước mới không? (có/không)").toLowerCase();
+            if (newReservation === "không") {
+                break;
+            }
+            if (newReservation === "có") {
+                let readerName = prompt("Tên bạn đọc:");
+                let bookID = prompt("Mã sách muốn đặt trước:");
+                let bookName = prompt("Tên sách (chỉ để tham khảo, không dùng để tính toán):");
+                let waitDays = parseInt(prompt("Số ngày dự kiến chờ (người dùng ước lượng, số nguyên ≥ 1):"));
+                while (isNaN(waitDays) || waitDays < 1) {
+                    waitDays = parseInt(prompt("Vui lòng nhập ngày mượn là số nguyên ≥ 1:"));
+                }
+
+                let priority = parseInt(prompt(`
+                Ưu tiên (nhập số): 
+                1 = Sinh viên bình thường 
+                2 = Giảng viên/Nghiên cứu sinh 
+                3 = Nhân viên thư viện / Đặc cách
+                `))
+                while (priority < 1 || priority > 3 || isNaN(priority)) {
+                    priority = parseInt(prompt("Vui lòng chỉ nhập 1/2/3:"));
+                }
+                processedCount++;
+
+                if (waitDays > 45) {
+                    console.log("Từ chối: Thời gian chờ quá lâu (>45 ngày)");
+                    rejectedCount++;
+                } else if (priority === 3) {
+                    console.log("Đặt trước thành công - Ưu tiên đặc cách cao nhất");
+                    successCount++;
+                } else if (priority === 2 && waitDays <= 30) {
+                    console.log("Đặt trước thành công - Ưu tiên giảng viên/nghiên cứu");
+                    successCount++;
+                } else if (priority === 1 && waitDays <= 21) {
+                    console.log("Đặt trước thành công");
+                    successCount++;
+                } else {
+                    console.log("Đặt trước tạm thời - Chờ xét duyệt thêm");
+                    pendingCount++;
+                }
+            }
+        }
+
+        console.log(`
+        Báo cáo
+        Tổng số yêu cầu đã xử lý: ${processedCount}
+        Số yêu cầu được đặt trước thành công: ${successCount}
+        Số yêu cầu bị từ chối: ${rejectedCount}
+        Số yêu cầu chờ xét duyệt: ${pendingCount}
+        `)
+    </script>
+</body>
+
+</html>

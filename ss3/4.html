@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý kiểm kê sách định kỳ trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let totalBook = 0;
+        let lostCount = 0;
+        let outOfCount = 0;
+        let manyCount = 0;
+        let normalCount = 0;
+        while (true) {
+            let bookStock = prompt("Tiếp tục kiểm kê sách tiếp theo? (có/không)").toLowerCase();
+            if (bookStock === "không") {
+                break;
+            }
+            if (bookStock === "có") {
+                let bookID = prompt("Nhập mã sách(chuỗi, không được để trống):");
+                while (!bookID) {
+                    bookID = prompt("Mã sách không được để trống. Nhập lại:");
+                }
+                let bookName = prompt("Nhập tên sách:");
+                let quantity = parseInt(prompt("Nhập số lượng thực tế trong kho (≥ 0)"));
+                while (isNaN(quantity) || quantity < 0) {
+                    quantity = parseInt(
+                        prompt("Không hợp lệ. Nhập số lượng (≥ 0)")
+                    );
+                }
+                let status = parseInt(prompt(`Nhập tình trạng sách
+                1 - Bình thường (có thể cho mượn)
+                2 - Mất (không còn trong kho)
+                `));
+                while (status !== 1 || status !== 2) {
+                    status = parseInt(prompt("Chỉ nhập 1 hoặc 2. Nhập lại:"));
+                }
+                totalBook++;
+                if (status === 2) {
+                    console.log("Sách mất");
+                    lostCount++;
+                } else {
+                    if (quantity === 0) {
+                        console.log("Sách hết (vẫn còn trong hệ thống)");
+                        outOfCount++;
+                    } else if (quantity >= 10) {
+                        console.log("Sách tồn kho nhiều");
+                        manyCount++;
+                    } else {
+                        console.log("Sách tồn kho bình thường");
+                        normalCount++;
+                    }
+                }
+            }
+        }
+        console.log(`
+        Báo cáo
+        Tổng số sách đã kiểm kê: ${totalBook} cuốn
+        Số sách mất: ${lostCount} cuốn
+        Số sách hết hàng: ${outOfCount} cuốn
+        Số sách tồn kho nhiều: ${manyCount} cuốn
+        Số sách tồn kho bình thường: ${normalCount} cuốn
+        `)
+    </script>
+</body>
+
+</html>

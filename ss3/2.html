@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý trả sách quá hạn trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let returnBook = parseInt(prompt("Hôm nay có bao nhiêu lượt trả sách?"));
+        let flag = 0;
+
+        for (let i = 1; i <= returnBook; i++) {
+            let userName = prompt(`Nhập tên người trả thứ ${i}`);
+            let bookName = prompt(`Nhập tên sách thứ ${i}`);
+            let numberOfDayBorrow = parseInt(prompt(`Nhập số ngày đã mượn sách thực tế của người thứ ${i}`));
+
+            while (numberOfDayBorrow < 1) {
+                numberOfDayBorrow = parseInt(prompt(`Số ngày không hợp lệ, vui lòng nhập lại (≥ 1):`));
+            }
+
+            if (numberOfDayBorrow <= 14) {
+                console.log(`Người thứ ${i} trả đúng hạn`);
+            } else if (numberOfDayBorrow > 14 && numberOfDayBorrow <= 21) {
+                console.log(`Người thứ ${i} trả muộn nhẹ, phạt nhắc nhở`);
+                flag++;
+            } else {
+                console.log(`Người thứ ${i} quá hạn nghiệm trọng, ghi biên bản phạt`);
+                flag++;
+            }
+        }
+
+        console.log(`
+        Tổng số lượt trả sách: ${returnBook}
+        Tổng số lượt trả muộn: ${flag}
+        `)
+    </script>
+</body>
+
+</html>

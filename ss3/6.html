@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý xử lý khiếu nại / phản hồi về dịch vụ thư viện</title>
+</head>
+
+<body>
+    <script>
+        let complaintLv3 = 0;
+        let complaintLv2 = 0;
+        let complaintLv1 = 0;
+        let suggestCount = 0;
+        let positiveCount = 0;
+        let totalFeedback = 0;
+
+        while (true) {
+            let newFeedback = prompt("Có khiếu nại/phản hồi mới từ bạn đọc không? (có/không):").toLowerCase();
+            if (newFeedback === "không") {
+                break;
+            }
+            if (newFeedback === "có") {
+                let readerName = prompt("Tên bạn đọc (không được để trống)");
+                while (!readerName) {
+                    readerName = prompt("Không được để trống tên bạn đọc, vui lòng nhập lại:");
+                }
+                let readerID = parseInt(prompt("Mã thẻ bạn đọc (nếu không có, có thể để trống):"));
+            }
+            let feedbackType = parseInt(prompt(`
+            1 = Phàn nàn / Khiếu nại 
+            2 = Đề xuất cải thiện 
+            3 = Phản hồi tích cực / Khen ngợi
+            `))
+            while (feedbackType < 1 || feedbackType > 3 || isNaN(feedbackType)) {
+                feedbackType = parseInt(prompt("Vui lòng chỉ nhập số 1/2/3:"));
+            }
+            let content = prompt("Nội dung phản hồi (ngắn gọn):");
+            totalFeedback++;
+            if (feedbackType === 1) {
+                let serverityLevel = parseInt(prompt(`
+                Mức độ nghiêm trọng (chỉ áp dụng khi loại = 1, nhập số): 
+                1 = Nhẹ (có thể xử lý nhanh) 
+                2 = Trung bình 
+                3 = Nghiêm trọng (cần báo cáo lãnh đạo)`));
+                while (serverityLevel < 1 || serverityLevel > 3 || isNaN(serverityLevel)) {
+                    serverityLevel = parseInt(prompt("Vui lòng chỉ nhập số 1/2/3: "));
+                }
+                if (serverityLevel === 3) {
+                    console.log(`→ Chuyển ngay lãnh đạo - Khiếu nại nghiêm trọng`)
+                    complaintLv3++;
+                } else if (serverityLevel === 2) {
+                    console.log(`→ Ghi nhận, sẽ xử lý trong ngày - Khiếu nại trung bình`);
+                    complaintLv2++;
+                } else {
+                    console.log(`→ Xử lý ngay tại quầy - Khiếu nại nhẹ`);
+                    complaintLv1++;
+                }
+            } else if (feedbackType === 2) {
+                console.log(`→ Cảm ơn! Đề xuất đã được ghi nhận`);
+                suggestCount++;
+            } else {
+                console.log(`→ Cảm ơn bạn đã phản hồi tích cực!`);
+                positiveCount++;
+            }
+        }
+        console.log(`
+        Báo cáo
+        Tổng số phản hồi/khiếu nại đã xử lý: ${totalFeedback}
+        Số khiếu nại nghiêm trọng (mức 3): ${complaintLv3}
+        Số khiếu nại trung bình (mức 2): ${complaintLv2}
+        Số khiếu nại nhẹ (mức 1): ${complaintLv1}
+        Số đề xuất cải thiện: ${suggestCount}
+        Số phản hồi tích cực: ${positiveCount}
+        `)
+
+
+    </script>
+</body>
+
+</html>

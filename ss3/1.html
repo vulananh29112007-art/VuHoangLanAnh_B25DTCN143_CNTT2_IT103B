@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý mượn sách trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let borrow = parseInt(prompt("Hôm nay có bao nhiêu lượt mượn sách?"));
+
+        for (let i = 1; i <= borrow; i++) {
+            let userName = prompt(`Nhập tên người mượn thứ ${i}`);
+            let bookName = prompt(`Nhập tên sách thứ ${i}`);
+            let numberOfDayBorrow = +prompt(`Nhập số ngày mượn sách của người thứ ${i}`);
+
+            if (numberOfDayBorrow > 14) {
+                console.log(`Cảnh báo: Thời gian mượn của người thứ ${i} vượt quy định (tối đa 14 ngày)`);
+            } else {
+                console.log(`Người thứ ${i} mượn thành công`);
+            }
+        }
+        console.log(`Hôm nay có tổng ${borrow} lượt mượn`);
+    </script>
+</body>
+
+</html>

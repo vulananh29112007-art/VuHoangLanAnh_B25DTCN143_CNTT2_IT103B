@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý gia hạn mượn sách</title>
+</head>
+
+<body>
+    <script>
+        let successCount = 0;
+        let failCount = 0;
+        while (true) {
+            let extension = prompt(`Có yêu cầu gia hạn mới không? (có/không)`).toLowerCase();
+            if (extension === "không") {
+                break;
+            }
+            if (extension === "có") {
+                let userName = prompt("Nhập tên bạn:");
+                let bookName = prompt("Nhập tên sách:");
+                let borrowedCurrentDay = parseInt(prompt("Số ngày đã mượn hiện tại (số nguyên ≥ 1)"));
+                while (borrowedCurrentDay < 1) {
+                    borrowedCurrentDay = parseInt(prompt("Số ngày không hợp lệ, vui lòng nhập lại (≥ 1)"));
+                }
+
+                let extensionRequestDate = parseInt(prompt("Số ngày muốn gia hạn thêm (số nguyên ≥ 1)"));
+                while (extensionRequestDate < 1) {
+                    extensionRequestDate = parseInt(prompt("Số ngày không hợp lệ, vui lòng nhập lại (≥ 1)"));
+                }
+                if (borrowedCurrentDay + extensionRequestDate > 60) {
+                    console.log("Không được gia hạn: Tổng thời gian vượt quá 60 ngày tối đa");
+                    failCount++;
+                } else if (borrowedCurrentDay > 45) {
+                    console.log("Không được gia hạn: Đã mượn quá lâu (>45 ngày)");
+                    failCount++;
+                } else if (borrowedCurrentDay + extensionRequestDate <= 30) {
+                    console.log("Gia hạn thành công");
+                    successCount++;
+                } else {
+                    console.log("Gia hạn thành công");
+                    successCount++;
+                }
+            }
+
+        }
+        console.log(`
+        Số lần gia hạn thành công: ${successCount}
+        Số lần gia hạn không thành công: ${failCount}
+        `)
+    </script>
+</body>
+
+</html>
