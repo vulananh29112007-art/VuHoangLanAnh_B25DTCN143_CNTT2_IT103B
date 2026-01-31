@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập tổng hợp</title>
+</head>
+
+<body>
+    <script>
+        // ===== ĐĂNG NHẬP =====
+        let failCount = 0;
+
+        while (failCount < 3) {
+            let password = prompt("Nhập mật khẩu:");
+
+            if (password === "admin123") {
+                console.log("Đăng nhập thành công");
+                break;
+            } else {
+                failCount++;
+                console.log(`Sai mật khẩu, còn ${3 - failCount} lần thử`);
+            }
+        }
+
+        if (failCount === 3) {
+            console.log("Hệ thống bị khóa");
+        } else {
+            // ===== MENU =====
+            while (true) {
+                let choice = prompt(`
+Chọn chức năng:
+1 - Nhập lô sách mới
+2 - Vẽ sơ đồ kệ sách
+3 - Thoát
+`);
+
+                if (choice === "1") {
+                    let n = parseInt(prompt("Bạn muốn nhập bao nhiêu cuốn sách?"));
+                    let total = 0;
+
+                    for (let i = 1; i <= n; i++) {
+                        let price = parseFloat(prompt(`Nhập giá tiền cuốn sách ${i}:`));
+
+                        if (price <= 0 || isNaN(price)) {
+                            console.log("Giá không hợp lệ, bỏ qua cuốn này");
+                            continue;
+                        }
+
+                        total += price;
+                    }
+
+                    console.log(`Tổng giá trị nhập kho đợt này là: ${total}`);
+                }
+
+                else if (choice === "2") {
+                    for (let khu = 1; khu <= 3; khu++) {
+                        for (let ke = 1; ke <= 5; ke++) {
+                            if (khu === 2 && ke === 3) {
+                                console.log(`Khu vực ${khu} - Kệ ${ke} (Đang sửa chữa)`);
+                                continue;
+                            }
+                            console.log(`Khu vực ${khu} - Kệ ${ke}`);
+                        }
+                    }
+                }
+
+                else if (choice === "3") {
+                    console.log("Hẹn gặp lại!");
+                    break;
+                }
+
+                else {
+                    console.log("Lựa chọn không hợp lệ");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
