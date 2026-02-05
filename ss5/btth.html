@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập thực hành</title>
+</head>
+
+<body>
+    <script>
+        let books = ["Nha Gia Kim", "Dac Nhan Tam", "Tuan Lam Viec 4 Gio"];
+        let choice;
+
+        do {
+            console.log("--- THƯ VIỆN KHOA HỌC ---");
+            console.log("1. Xem danh sách");
+            console.log("2. Nhập sách mới");
+            console.log("3. Mượn sách (Xóa)");
+            console.log("4. Sửa tên sách");
+            console.log("5. Sắp xếp kệ");
+            console.log("0. Thoát");
+
+            choice = parseInt(prompt("Bạn chọn:"));
+
+            switch (choice) {
+                case 1:
+                    console.log(`=> Danh sách hiện tại (${books.length} cuốn):`);
+                    for (let i = 0; i < books.length; i++) {
+                        console.log(`${i + 1}. ${books[i]}`);
+                    }
+                    break;
+
+                case 2:
+                    let newBook = prompt("Nhập tên sách mới:");
+                    while (!newBook) {
+                        newBook = prompt("Tên sách không được để trống:");
+                    }
+                    books.push(newBook);
+                    console.log("Đã thêm thành công!");
+                    break;
+
+                case 3:
+                    let borrowBook = prompt("Nhập tên sách muốn mượn:");
+                    let indexBorrow = books.indexOf(borrowBook);
+                    if (indexBorrow === -1) {
+                        console.log(`=> Lỗi: Không tìm thấy sách ${borrowBook}!`);
+                    } else {
+                        books.splice(indexBorrow, 1);
+                        console.log(`=> Đã cho mượn cuốn '${borrowBook}'.`);
+                    }
+                    break;
+
+                case 4:
+                    let oldName = prompt("Nhập tên sách cần sửa:");
+                    let indexEdit = books.indexOf(oldName);
+                    if (indexEdit === -1) {
+                        console.log("Không tìm thấy sách cần sửa!");
+                    } else {
+                        let newName = prompt("Nhập tên sách mới:");
+                        while (!newName) {
+                            newName = prompt("Tên mới không được để trống:");
+                        }
+                        books[indexEdit] = newName;
+                        console.log("Cập nhật sách thành công!");
+                    }
+                    break;
+
+                case 5:
+                    books.sort();
+                    console.log("Danh sách sau khi sắp xếp:");
+                    for (let i = 0; i < books.length; i++) {
+                        console.log(`${i + 1}. ${books[i]}`);
+                    }
+                    break;
+
+                case 0:
+                    console.log("Thoát chương trình.");
+                    break;
+
+                default:
+                    console.log("Lựa chọn không hợp lệ!");
+            }
+        } while (choice !== 0);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách tên sách trong thư viện</title>
+</head>
+
+<body>
+    <script>
+        let bookName = [];
+        let quantityBook = parseInt(prompt("Bạn muốn trả bao nhiêu cuốn sách ? "));
+        while (quantityBook <= 0) {
+            quantityBook = parseInt(prompt("Nhập số sách là số nguyên dương: "));
+        }
+        for (let i = 0; i < quantityBook; i++) {
+            let name = prompt(`Nhập tên cuốn sách thứ ${i + 1}:`);
+            bookName.push(name);
+        }
+
+        console.log(`Tổng số sách đã được trả: ${bookName.length}`);
+        console.log("Danh sách sách đã trả:");
+        for (let i = 0; i < bookName.length; i++) {
+            console.log(`${i + 1}. ${bookName[i]}`);
+        }
+    </script>
+</body>
+
+</html>

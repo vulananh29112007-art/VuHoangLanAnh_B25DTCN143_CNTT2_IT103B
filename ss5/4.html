@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách sách cần sửa chữa / loại bỏ</title>
+</head>
+
+<body>
+    <script>
+        let booksId = [];
+        let booksName = [];
+        let booksStatus = [];
+
+        let bookNumber = parseInt(prompt("Có bao nhiêu cuốn sách cần kiểm tra tình trạng hôm nay?"));
+        while (bookNumber < 1) {
+            bookNumber = parseInt(prompt("Vui lòng nhập số nguyên dương cho số sách cần kiểm tra tình trạng:"));
+        }
+        while (!bookNumber) {
+            bookNumber = parseInt(prompt("Không được để rỗng:"));
+        }
+        for (let i = 0; i < bookNumber; i++) {
+            let bookId = prompt("Nhập mã sách (không để trống):");
+            while (!bookId) {
+                bookId = prompt("Vui lòng không để trống mã sách:");
+            }
+            booksId.push(bookId);
+
+            let bookName = prompt("Nhập tên sách (không để trống):");
+            while (!bookName) {
+                bookName = prompt("Vui lòng không để trống tên sách:");
+            }
+            booksName.push(bookName);
+
+            let bookStatus = parseInt(prompt(`Nhập tình trạng ban đầu (chọn số 1-3): 
+1 → Hỏng nhẹ
+2 → Hỏng nặng
+3 → Cần sửa gấp:`));
+            while (!bookStatus) {
+                bookStatus = parseInt(prompt("Vui lòng không để trống tình trạng sách:"))
+            }
+            while (bookStatus < 1 || bookStatus > 3) {
+                bookStatus = parseInt(prompt("Vui lòng chỉ nhập 1/2/3:"))
+            }
+            if (bookStatus == 1) {
+                bookStatus = "Hỏng nhẹ";
+            } else if (bookStatus == 2) {
+                bookStatus = "Hỏng nặng"
+            } else {
+                bookStatus = "Cần sửa gấp"
+            }
+            booksStatus.push(bookStatus);
+        }
+        for (let i = 0; i < bookNumber; i++) {
+            console.log(`${i + 1}. ${booksId[i]} - ${booksName[i]} - ${booksStatus[i]}`)
+        }
+        do {
+            let choice = parseInt(prompt(`-------MENU-------
+            1: Sửa tình trạng một cuốn sách
+            2: Loại bỏ (xóa) một cuốn sách khỏi danh sách
+            0: Kết thúc và in báo cáo cuối
+            Nhập lựa chọn của bạn:`))
+
+            switch (choice) {
+                case 1:
+                    let search = prompt("Nhập mã sách cần sửa:");
+                    while (!search) {
+                        search = prompt("Vui lòng không để trống mã sách cần sửa:");
+                    }
+                    let found = -1;
+                    for (let i = 0; i < bookNumber; i++) {
+                        if (booksStatus[i] == search) {
+                            found = i;
+                            break;
+                        }
+                    }
+                    if (found == -1) {
+                        console.log("Không tìm thấy mã sách cần sửa.")
+                        break;
+                    }
+                    let newStatus = parseInt(prompt(`Nhập lựa chọn 1-5:
+                    1: Hỏng nhẹ
+                    2: Hỏng nặng
+                    3: Cần sửa gấp
+                    4: Đã sửa xong
+                    5: Loại bỏ`));
+                    while (newStatus < 1 || newStatus > 5) {
+                        newStatus = parseInt(prompt("Vui lòng chỉ chọn từ 1-5:"));
+                    }
+                    while (!newStatus) {
+                        newStatus = parseInt(prompt("Không được để trống:"));
+                    }
+                    if (newStatus == 1) booksStatus[found] = "Hỏng nhẹ";
+                    else if (newStatus == 2) booksStatus[found] = "Hỏng nặng";
+                    else if (newStatus == 3) booksStatus[found] = "Cần sửa gấp";
+                    else if (newStatus == 4) booksStatus[found] = "Đã sửa xong";
+                    else booksStatus[found] = "Loại bỏ";
+                    console.log("Danh sách sau khi sửa:");
+                    for (let i = 0; i < booksId.length; i++) {
+                        console.log(`${i + 1}. ${booksId[i]} - ${booksName[i]} - ${booksStatus[i]}`);
+                    }
+                    break;
+                case 2:
+                    let deleteId = prompt("Nhập mã sách cần xóa:");
+                    while (!deleted) {
+                        deleteId = prompt("Không được để trống mã sách:");
+                    }
+                    let deleteIndex = -1;
+                    for (let i = 0; i < bookNumber; i++) {
+                        deleteIndex = i;
+                    }
+                    if (deleteIndex == -1) {
+                        console.log("Không tìm thấy phần tử cần xóa");
+                        break;
+                    }
+                    booksId.splice(deleteIndex, 1);
+                    booksName.splice(deleteIndex, 1);
+                    booksStatus.splice(deleteIndex, 1);
+                    console.log("Danh sách sau khi xóa:");
+                    for (let i = 0; i < bookNumber; i++) {
+                        console.log(`${i + 1}. ${booksId[i]} - ${booksName[i]} - ${booksStatus[i]}`);
+                    }
+                    break;
+                case 0:
+                    let repaired = 0;
+                    let removed = 0;
+
+                    for (let i = 0; i < booksStatus.length; i++) {
+                        if (booksStatus[i] === "Đã sửa xong") repaired++;
+                        if (booksStatus[i] === "Loại bỏ") removed++;
+                    }
+
+                    console.log("----- BÁO CÁO CUỐI -----");
+                    console.log(`Tổng số sách còn lại: ${booksId.length}`);
+                    console.log(`Số sách đã sửa xong: ${repaired}`);
+                    console.log(`Số sách bị loại bỏ: ${removed}`);
+
+                    if (booksId.length > 0) {
+                        console.log("Danh sách sách còn lại:");
+                        for (let i = 0; i < booksId.length; i++) {
+                            console.log(`${i + 1}. ${booksId[i]} - ${booksName[i]} - ${booksStatus[i]}`);
+                        }
+                    } else {
+                        console.log("Không còn sách nào trong danh sách.");
+                    }
+                    break;
+            }
+
+        } while (choice != 0);
+    </script>
+</body>
+
+</html>
