@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bài 3</title>
+</head>
+
+<body>
+    <script>
+        let players = [];
+
+        function printTeamRoster() {
+            console.log("===== DANH SÁCH ĐỘI BÓNG =====");
+            for (let i = 0; i < players.length; i++) {
+                console.log(
+                    `${i + 1}. Mã: ${players[i].id} | Tên: ${players[i].name} | Vị trí: ${players[i].position}`
+                );
+            }
+        }
+
+        let n;
+        do {
+            n = Number(prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?"));
+        } while (!Number.isInteger(n) || n <= 0);
+
+        for (let i = 0; i < n; i++) {
+            let playerId;
+            let isDuplicate;
+
+            do {
+                isDuplicate = false;
+                playerId = prompt(`Nhập mã cầu thủ thứ ${i + 1}:`);
+
+                for (let j = 0; j < players.length; j++) {
+                    if (players[j].id === playerId) {
+                        isDuplicate = true;
+                        alert("Mã cầu thủ đã tồn tại, nhập lại!");
+                        break;
+                    }
+                }
+            } while (!playerId || isDuplicate);
+
+            let playerName;
+            do {
+                playerName = prompt("Nhập tên cầu thủ:");
+            } while (!playerName);
+
+            let positionNumber;
+            let positionText;
+
+            do {
+                positionNumber = Number(
+                    prompt(
+                        "Chọn vị trí:\n1. Thủ môn\n2. Hậu vệ\n3. Tiền vệ\n4. Tiền đạo"
+                    )
+                );
+            } while (positionNumber < 1 || positionNumber > 4);
+
+            if (positionNumber === 1) positionText = "Thủ môn";
+            else if (positionNumber === 2) positionText = "Hậu vệ";
+            else if (positionNumber === 3) positionText = "Tiền vệ";
+            else positionText = "Tiền đạo";
+
+            players.push({
+                id: playerId,
+                name: playerName,
+                position: positionText
+            });
+        }
+
+        printTeamRoster();
+
+    </script>
+</body>
+
+</html>

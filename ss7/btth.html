@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập tổng hợp</title>
+</head>
+
+<body>
+    <script>
+        let players = [];
+        let goals = [];
+
+        function addPlayer(name, goal) {
+            players.push(name);
+            goals.push(goal);
+            console.log(`Đã thêm ${name} thành công`);
+        }
+
+        function showSquad() {
+            for (let i = 0; i < players.length; i++) {
+                console.log(`${i + 1}. ${players[i]} - ${goals[i]} bàn`);
+            }
+        }
+
+        const getTotalGoals = function () {
+            let total = 0;
+            for (let i = 0; i < goals.length; i++) {
+                total += goals[i];
+            }
+            if (goals.length === 0) {
+                console.log("Chưa có bàn thắng nào");
+            }
+            return total;
+        }
+
+        function findMostGoals(goalsArray) {
+            let max = goalsArray[0];
+            for (let i = 0; i < goalsArray.length; i++) {
+                if (goalsArray[i] > max) {
+                    max = goalsArray[i];
+                }
+            }
+            return max;
+        }
+        let choice;
+        do {
+            choice = Number(prompt(`Menu Quản Lý Đội Bóng:
+            1. Nhập cầu thủ
+            2. Xem danh sách
+            3. Tổng bàn thắng
+            4. Xem vua phá lưới
+            0. Thoát
+            Mời bạn nhập lựa chọn(0-5):
+            `))
+            while (isNaN(choice) || choice < 0 || choice > 4) {
+                choice = Number(prompt("Vui lòng chỉ nhập lựa chọn 0-5:"))
+            }
+            switch (choice) {
+                case 1:
+                    let name = prompt("Nhập tên cầu thủ:");
+                    let goal = Number(prompt("Nhập số bàn thắng:"));
+                    addPlayer(name, goal);
+                    break;
+                case 2:
+                    showSquad();
+                    break;
+                case 3:
+                    console.log(`Tổng số bàn thắng của cả đội là: ${getTotalGoals()} bàn`);
+                    break;
+                case 4:
+                    if (goals.length == 0) {
+                        console.log("Chưa có cầu thử nào");
+                    }
+                    let maxGoal = findMostGoals(goals);
+                    let index = goals.indexOf(maxGoal);
+                    console.log(`Vua phá lưới hiện tại: ${players[index]} - ${maxGoal} bàn`);
+                    break;
+                case 5:
+                    console.log("Kết thúc chương trình");
+                    break;
+                default:
+                    console.log("Lựa chọn khôgn hợp lệ");
+            }
+        } while (choice != 0);
+    </script>
+</body>
+
+</html>
