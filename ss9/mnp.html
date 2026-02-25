@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>miniproject</title>
+</head>
+
+<body>
+    <script>
+        let names = ["Laptop Dell", "Chuột Logitech", "Bàn phím cơ", "Màn hình Samsung"];
+        let prices = [15000, 350, 1200, 4500];
+        let stocks = [5, 0, 12, 3];
+
+        let choice;
+
+        do {
+            choice = Number(prompt(`Menu
+            1.Lọc danh mục sản phẩm cao cấp
+            2.Kiểm định trạng thái dữ liệu
+            3.Phân tích giá trị vốn hóa
+            4.Triển khai chiến dịch chiết khấu
+            5.Truy vấn sản phẩm theo từ khóa
+            6.Báo cáo tình trạng tồn kho
+            7.Thoát
+            Nhập lựa chọn của bạn:
+            `))
+
+            switch (choice) {
+                case 1: {
+                    const highProduct = names.filter((value, index) => prices[index] > 500);
+                    alert(highProduct.length > 0 ? "Sản phẩm cao cấp:\n" + highProduct.join(", ") : "Không có sản phẩm nào > 500");
+                    break;
+                }
+                case 2: {
+                    const outOfStock = stocks.some(stock => stock === 0);
+                    const allPrice = prices.every(price => price > 100);
+                    alert(`Kết quả kiểm định:
+                    - Có sản phẩm hết hàng: ${outOfStock ? "Có" : "Không"}
+                    -Tất cả sản phẩm giá > 100: ${allPrice ? "Có" : "Không"}
+                    `);
+                    break;
+
+                }
+                case 3: {
+                    const allValue = prices.reduce((acc, value, index) => {
+                        return acc += (value * stocks[index]);
+                    }, 0);
+                    alert(`Tổng giá trị tài sản trong kho: ${allValue}`);
+                    break;
+                }
+                case 4: {
+                    prices = prices.map(price => price * 0.9);
+                    alert("Đã áp dụng giảm 10% cho toàn bộ sản phẩm!");
+                    break;
+                }
+                case 5: {
+                    let keyword = prompt("Nhập từ khóa tìm kiếm:").toLowerCase();
+                    let searchResult = names
+                        .map((name, index) =>
+                            name.toLowerCase().includes(keyword)
+                                ? `- ${name} | Giá: ${prices[index].toFixed(2)} | Kho: ${stocks[index]}`
+                                : null
+                        )
+                        .filter(item => item !== null)
+                        .join("\n");
+
+                    alert(searchResult || "Không tìm thấy sản phẩm nào khớp với từ khóa.");
+                    break;
+                }
+                case 6: {
+                    alert(
+                        "Báo cáo trạng thái tồn kho:\n" +
+                        names.map((name, index) =>
+                            `${name} - ${stocks[index] > 0 ? "Còn hàng" : "Hết hàng"}`
+                        ).join("\n")
+                    );
+                    break;
+                }
+                case 7: {
+                    alert("Thoát chương trình");
+                }
+                default: {
+                    alert("Lựa chọn không hợp lệ");
+                }
+            }
+        } while (choice != 7);
+
+    </script>
+</body>
+
+</html>
