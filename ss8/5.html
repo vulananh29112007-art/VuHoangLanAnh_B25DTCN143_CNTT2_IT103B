@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bài 5</title>
+</head>
+
+<body>
+    <script>
+        const players = [
+            "Messi - Forward - 25 - 15",
+            "Ronaldo - Forward - 30 - 10",
+            "Neymar - Forward - 18 - 20",
+            "De Bruyne - Midfielder - 8 - 25",
+            "Kante - Midfielder - 2 - 5",
+            "Van Dijk - Defender - 5 - 3",
+            "Alisson - Goalkeeper - 0 - 1",
+        ];
+        function reportTopPerformers(minPerformance, players) {
+            let filteredTotal = players
+                .map(playerString => {
+                    let parts = playerString.split(" - ");
+                    let name = parts[0];
+                    let performance = parseInt(parts[2]) + parseInt(parts[3]);
+                    return [name, performance];
+                })
+                .filter(player => player[1] >= minPerformance)
+                .map(player => {
+                    console.log(`${player[0]}: ${player[1]}`);
+                    return player[1];
+                })
+                .reduce((sum, performance) => {
+                    return sum + performance;
+                }, 0);
+            console.log(`Tổng hiệu suất: ${filteredTotal}`);
+            return filteredTotal;
+        }
+        reportTopPerformers(30, players);
+    </script>
+</body>
+
+</html>

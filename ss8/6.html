@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bài 6</title>
+</head>
+
+<body>
+    <script>
+        const players = [
+            "Messi - Forward - 25 - 15 - 34",
+            "Ronaldo - Forward - 30 - 10 - 38",
+            "Neymar - Forward - 18 - 20 - 32",
+            "De Bruyne - Midfielder - 8 - 25 - 35",
+            "Kante - Midfielder - 2 - 5 - 36",
+            "Van Dijk - Defender - 5 - 3 - 33",
+            "Alisson - Goalkeeper - 0 - 1 - 37",
+        ];
+        function reportByPosition(playersList, minGoals = 0) {
+            console.log("BÁO CÁO HIỆU SUẤT THEO VỊ TRÍ");
+            let statsArray = [];
+            playersList
+                .map(playerString => playerString.split(" - "))
+                .filter(player => parseInt(player[2]) >= minGoals)
+                .forEach(player => {
+                    let position = player[1];
+                    let goals = parseInt(player[2]);
+                    let assists = parseInt(player[3]);
+                    let matches = parseInt(player[4]);
+                    let existPosition = statsArray.find(item => {
+                        return item[0] === position;
+                    });
+                    if (!existPosition) {
+                        statsArray.push([position, 1, goals, assists, matches]);
+                    } else {
+                        existPosition[1] += 1;
+                        existPosition[2] += goals;
+                        existPosition[3] += assists;
+                        existPosition[4] += matches;
+                    }
+                });
+            let totalTeamGoals = 0;
+            statsArray.forEach(row => {
+                let rawPerformance = (row[2] + row[3]) / row[4];
+                let performance = Math.round(rawPerformance * 100) / 100;
+                totalTeamGoals = totalTeamGoals + row[2];
+                console.log(`${row[0]}:`);
+                console.log(`- Số cầu thủ: ${row[1]}`);
+                console.log(`- Tổng bàn thắng: ${row[2]}`);
+                console.log(`- Tổng kiến tạo: ${row[3]}`);
+                console.log(`- Tổng số trận: ${row[4]}`);
+                console.log(`- Trung bình hiệu suất/trận: ${performance}`);
+                console.log("");
+            });
+            console.log(`Tổng bàn thắng toàn đội: ${totalTeamGoals}`);
+        }
+        reportByPosition(players, 5);
+    </script>
+</body>
+
+</html>

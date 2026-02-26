@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bài tập tổng hợp</title>
+</head>
+
+<body>
+    <script>
+        const squad = [
+
+            ["Nguyen Van A", 10, "FW"],
+
+            ["Tran Van B", 5, "MF"],
+
+            ["Le Van C", 2, "DF"],
+
+            ["Pham Van D", 12, "FW"],
+
+            ["Hoang Van E", 0, "GK"],
+
+            ["Dang Van F", 7, "MF"]
+
+        ];
+        let choice;
+        do {
+            choice = Number(prompt(`MENU
+            1. Xem danh sách cầu thủ
+            2. Tìm kiếm cầu thủ
+            3. Lọc cầu thủ theo vị trí
+            4. Thống kê tổng bàn thắng
+            5. Kiểm tra hiệu suất
+            0. Thoát chương trình:`));
+
+            switch (choice) {
+                case 1: {
+                    console.log(`DANH SÁCH CẦU THỦ`);
+                    let listPlayer = squad.map(player => `${player[0]} ${player[1]}: ${player[2]} bàn thắng`);
+                    console.log(listPlayer);
+                    break;
+                }
+
+                case 2: {
+                    let name = prompt("Nhập tên cầu thủ cần tìm kiếm:");
+                    let foundPlayer = squad.find(player => player[0].toLowerCase() === name.toLowerCase());
+                    console.log(foundPlayer ? foundPlayer : "Không tìm thấy cầu thủ");
+                    break;
+                }
+
+                case 3: {
+                    let pos = prompt("Nhập vị trí cần lọc:");
+                    let cutPlayer = squad.filter(player => player[2].toLowerCase() === pos.toLowerCase());
+                    console.log(cutPlayer.length == 0 ? "Không lọc được vị trí" : cutPlayer);
+                    break;
+                }
+
+                case 4: {
+                    let totalGoal = squad.reduce((goal, value, index, arr) => {
+                        goal += value;
+                        console.log(`Tổng số bàn thắng hiện tại là:`);
+                        return goal;
+                    }, 0);
+                    break;
+                }
+
+                case 5: {
+                    let test = squad.some(player => player[1] <= 0);
+                    console.log(test ? "Có cầu thủ chưa ghi bàn" : " tất cả cầu thủ đều đã ghi bàn");
+                    break;
+                }
+
+                case 0: {
+                    console.log("Kết thúc chương trình");
+                    break;
+                }
+
+                default: {
+                    console.log("Lựa chọn không hợp lệ");
+                }
+            }
+        } while (choice != 0);
+    </script>
+</body>
+
+</html>
