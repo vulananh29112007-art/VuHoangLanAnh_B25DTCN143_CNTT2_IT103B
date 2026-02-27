@@ -18,13 +18,18 @@
         ];
 
         let id = prompt("Nhập ID cần tìm kiếm:");
-        function foundProduct = products.find(id => id == P03);
+        function foundProduct(id) {
+            return products.find(p => p.id === id);
+        }
 
-        if (id == P03) {
-            console.log(`ID ${products.id}, name: ${products.name}, price: ${products.price}, category: ${products.category}, inStock: ${products.inStock}`);
+        let found = foundProduct(id);
+
+        if (found) {
+            console.log(`ID ${found.id}, name: ${found.name}, price: ${found.price}, category: ${found.category}, inStock: ${found.inStock}`);
         } else {
             console.log("Không tìm thấy sản phẩm");
         };
+
 
     </script>
 </body>
