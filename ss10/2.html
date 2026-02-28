@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bài 2</title>
+</head>
+
+<body>
+    <script>
+        const player = {
+            name: "De Bruyne",
+            position: "Midfielder",
+            goals: 8,
+            assists: 25,
+            maschesPlayed: 35,
+            performancePerMatch: 0,
+            isKeyPlayer: false,
+        };
+
+        let addPerformanceScore = () => {
+            let performancePerMatch = ((player.goals + player.assists) / player.maschesPlayed).toFixed(2);
+            let isKeyPlayer;
+            if (performancePerMatch >= 1.0) {
+                isKeyPlayer = true;
+            } else {
+                isKeyPlayer = false;
+            }
+            player.performancePerMatch = performancePerMatch;
+            player.isKeyPlayer = isKeyPlayer;
+        }
+        addPerformanceScore();
+        console.log(`
+            Name: ${player.name}
+            Position: ${player.position}
+            Goals: ${player.goals}
+            Assists: ${player.assists}
+            Matches: ${player.maschesPlayed}
+            Performance: ${player.performancePerMatch}
+            Key Player: ${player.isKeyPlayer}
+ `);
+
+    </script>
+</body>
+
+</html>
