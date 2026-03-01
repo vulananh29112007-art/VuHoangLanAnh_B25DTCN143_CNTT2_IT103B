@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let students = [
+            { id: 1, name: "Nguyen Van An", age: 20, gpa: 8.5, status: "active" },
+            { id: 2, name: "Tran Thi Bich", age: 17, gpa: 7.2, status: "active" },
+            { id: 3, name: "Le Hoang Cuong", age: 22, gpa: 9.1, status: "inactive" },
+            { id: 4, name: "Pham Thi Dung", age: 19, gpa: 6.8, status: "active" },
+        ]
+
+        const showMenu = () => {
+            let choice = Number(prompt(`
+                1. Create Student
+                2. Read All Students
+                3. Filter Scholarship Candidates
+                4. Update Student Profile
+                5. Delete Record
+                6. Compliance Verification
+                7. Academic Statistics
+                8. Data Normalization
+                0. Exit
+                Enter your choice:
+            `))
+            return choice;
+        }
+
+        const createStudent = () => {
+            let name = prompt("Nhập tên:");
+            if (name.trim === "") return alert("name cannot be empty");
+
+            let age = parseInt(prompt("Nhập tuổi:"));
+            if (age < 1) return alert("invalid age");
+
+            let gpa = parseFloat(prompt("Nhập gpa(0.0-10.0):"));
+            if (gpa < 0 && gpa > 10) return alert("invalid gpa");
+
+            let status = prompt("Nhập trạng thái(active hoặc inactive):");
+            if (status !== "active" && status !== "inactive") return alert("invalid status");
+
+            let student = {
+                id: ++students.length,
+                name,
+                age,
+                gpa,
+                status
+            };
+            students.push(student);
+            alert(`ID: ${student.id} | Name: ${student.name} | Age: ${student.age} | gpa: ${student.gpa} | status: ${student.status}`);
+        };
+
+        const readAllStudents = () => {
+            let studentList = students.map(student => `ID: ${student.id} | Name: ${student.name} | Age: ${student.age} | GPA: ${student.gpa} | Status: ${student.status}\n`);
+            alert(studentList);
+        }
+
+        const filterGPA = () => {
+            let scholarshipCandidates = students.filter(student => student.gpa >= 8.0);
+            if (scholarshipCandidates.length === 0) {
+                console.log("No scholarship candidates found.");
+            } else {
+                let candidateList = scholarshipCandidates.map(student => `ID: ${student.id} | Name: ${student.name} | Age: ${student.age} | GPA: ${student.gpa} | Status: ${student.status}`);
+                console.log(candidateList);
+            };
+        }
+
+        const updateStudentProfile = () => {
+            let findID = +prompt("Nhập ID muốn cập nhật:");
+            let foundID = students.find(s => s.id === findID);
+            if (foundID) {
+                foundID.name = prompt("Nhập tên mới");
+                foundID.gpa = parseFloat(prompt("Nhập gpa mới"));
+                alert("Update success");
+            } else {
+                alert("not found");
+            }
+        }
+
+        const deleteRecord = () => {
+            let findID = +prompt("Nhập ID cần xóa:");
+            let foundID = students.findIndex(s => s.id === findID);
+
+            if (foundID === -1) return alert("Not found");
+            else {
+                let choose = prompt((`Are u sure u want to delete?
+                ID: ${students[foundID].id} | Name: ${students[foundID].name} | Age: ${students[foundID].age} | GPA: ${students[foundID].gpa} | Status: ${students[foundID].status}
+                
+                Type "yes" to comfirm:`)).toLowerCase();
+                if (choose === "yes") {
+                    students.splice(foundID, 1);
+                    return alert(`Student "${students[foundID].name}" has been deleted`);
+                } else {
+                    return alert("Deletion cancelled.");
+                }
+            }
+        }
+
+        const complianceVerification = () => {
+            let output = 0;
+            let ageEach = students.some(s => s.age < 18);
+            if (ageEach) {
+                output += alert(`Has at least one student under 18: YES
+                Minors found: 
+                => ${students.filter(s => s.age < 18).map(s => `${s.name}(Age: ${s.age})`)}`);
+            } else {
+                output += alert("Has at least one student under 18: NO");
+            }
+
+            let allStatus = students.every(s => s.status === "active");
+            if (allStatus) output += alert(`All students have "active" status: YES`);
+            else {
+                output += alert(`All students have "active" status: NO
+                Inactive students:
+                => ${students.filter(s => s.status === "inactive").map(s => `${s.name}(Status: ${s.status})`)}`);
+            }
+
+        }
+
+        const academicStatistics = () => {
+            let totalStudents = students.length;
+            let totalGpa = students.reduce((sum, value) => sum + value.gpa, 0);
+            let averageGpa = (totalGpa / totalStudents).toFixed(2);
+
+            let max = students[0].gpa;
+            let min = students[0].gpa;
+            let highestGpa = students.map((s) => {
+                if (s.gpa > max) max = s.gpa;
+                return s.gpa;
+            });
+            let lowestGpa = students.map((s) => {
+                if (s.gpa < min) min = s.gpa;
+                return s.gpa;
+            });
+            alert(`Academic Statistics:
+            Total Students: ${totalStudents}
+            Total Gpa sum: ${totalGpa}
+            Average GPA: ${averageGpa}
+            Highest GPA: ${max}
+            Lowest GPA: ${min}`);
+        }
+
+        const dataNormalization = () => {
+            let newName = students.map(s => {
+                let toUpperCaseName = s.name.toUpperCase();
+                return `ID: ${s.id} | Tên: ${toUpperCaseName} | Tuổi: ${s.age} | Gpa: ${s.gpa} | Status: ${s.status}`
+            }).join("\n");
+            alert("Danh sách sinh viên:\n" + newName);
+        }
+
+
+        do {
+            choice = showMenu();
+            switch (choice) {
+                case 1: {
+                    createStudent();
+                    break;
+                }
+                case 2: {
+                    readAllStudents();
+                    break;
+                }
+                case 3: {
+                    filterGPA();
+                    break;
+                }
+                case 4: {
+                    updateStudentProfile();
+                    break;
+                }
+                case 5: {
+                    deleteRecord();
+                    break;
+                }
+                case 6: {
+                    complianceVerification();
+                    break;
+                }
+                case 7: {
+                    academicStatistics();
+                    break;
+                }
+                case 8: {
+                    dataNormalization();
+                    break;
+                }
+                case 0: {
+                    alert("Exit");
+                    break;
+                }
+                default: {
+                    alert("Lựa chọn không hợp lệ");
+                }
+            }
+        } while (choice != 0);
+    </script>
+</body>
+
+</html>
