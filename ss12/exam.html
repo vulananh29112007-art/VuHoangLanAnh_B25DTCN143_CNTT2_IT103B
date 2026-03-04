@@ -10,60 +10,37 @@
 <body>
     <script>
         let products = [
-            { id: "P01", name: "Laptop Macbook Pro M3", price: "2000", category: "Laptop", inStock: true },
-            { id: "P02", name: "Chuột không dây Logitech", price: "45", category: "Phụ kiện", inStock: true },
-            { id: "P03", name: "Bàn phí cơ Keychron", price: "95", category: "Phụ kiện", inStock: false },
-            { id: "P04", name: "Màn hình Dell UltraSharp", price: "450", category: "Màn hình", inStock: true },
-            { id: "P05", name: "Tai nghe Sony WH-1000XM5", price: "350", category: "Phụ kiện", inStock: true }
+            { id: "P01", name: "Laptop Macbook Pro M3", price: 2000, category: "Laptop", inStock: true },
+            { id: "P02", name: "Chuột không dây Logitech", price: 45, category: "Phụ kiện", inStock: true },
+            { id: "P03", name: "Bàn phím cơ Keychron", price: 95, category: "Phụ kiện", inStock: false },
+            { id: "P04", name: "Màn hình Dell UltraSharp", price: 450, category: "Màn hình", inStock: true },
+            { id: "P05", name: "Tai nghe Sony WH-1000XM5", price: 350, category: "Phụ kiện", inStock: true }
         ];
 
+        // 1️⃣ Lọc sản phẩm còn hàng và sắp xếp theo giá tăng dần
         const filterAndSort = () => {
-            let inStockTrueProduct = products.filter(p => p.inStock === "true");
-            console.log("Danh sách các sản phẩm đang có sẵn:\n " + inStockTrueProduct);
-            let sortProducts = inStockTrueProduct.sort();
-            console.log("Sắp xếp danh sách: \n" + sortProducts);
-            return console.log("Danh sách đã được lọc và sắp xếp thành công");
-        }
-        const information = () => {
-            let filterCategory = products.filter(p => p.category === "Phụ kiện");
-            console.log("Danh sách các sản phẩm thuộc danh mục Phụ kiện:\n " + filterCategory);
-        }
-        const totalPrice = () => {
-            let inStockTrueProduct = products.filter(p => p.inStock === "true");
-            let toTal = inStockProduct.reduce((sum, value) => sum + value.price, 0);
-            return console.log(total);
-        }
-        do {
-            let choice = +prompt(`MENU
-            1. Lọc và Sắp xếp danh sách ưu tiên
-            2. Trích xuất thông tin theo điều kiện
-            3. Thống kê tổng giá trị tài sản trong kho
-            0. Thoát
-            Nhập lựa chọn:`);
+            let result = products.filter(p => p.inStock).sort((a, b) => a.price - b.price);
 
-            switch (choice) {
-                case 1: {
-                    filterAndSort();
-                    break;
-                }
-                case 2: {
-                    information();
-                    break;
-                }
-                case 3: {
-                    totalPrice();
-                    break;
-                }
-                case 0: {
-                    return alert("Thoát chương trình");
-                    break;
-                }
-                default: {
-                    alert("Lựa chọn không hợp lệ");
-                    break;
-                }
-            }
-        } while (choice != 0);
+            console.log("Danh sách sản phẩm còn hàng (đã sắp xếp):");
+            console.log(result);
+        };
+
+        // 2️⃣ Lọc theo danh mục "Phụ kiện"
+        const information = () => {
+            let result = products.filter(p => p.category === "Phụ kiện");
+            console.log(`Danh sách sản phẩm thuộc Phụ kiện: ${result.map(p => p.name)}`);
+        };
+
+        // 3️⃣ Tính tổng giá sản phẩm còn hàng
+        const totalPrice = () => {
+            let total = products.filter(p => p.inStock).reduce((sum, value) => sum + value.price, 0);
+
+            console.log("Tổng giá sản phẩm còn hàng:", total);
+        };
+
+        filterAndSort();
+        information();
+        totalPrice();
     </script>
 </body>
 
