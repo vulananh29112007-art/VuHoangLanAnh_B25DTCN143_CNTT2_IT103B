@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>📝 Todo List</h1>
+
+        <div class="input-row">
+            <input type="text" id="taskInput" placeholder="Nhập công việc..." />
+            <button>Thêm</button>
+        </div>
+
+        <ul id="taskList">
+            <li>Quét nhà</li>
+            <li>Giặt quần áo</li>
+        </ul>
+    </div>
+    <script>
+        const listTask = document.getElementById("taskList");
+        let taskList = [
+            { id: 1, work: "Quét nhà" },
+            { id: 2, work: "Giặt quần áo" }
+        ]
+        let idInput = 3;
+        function renderTask() {
+            let str = "";
+            for (let i = 0; i < taskList.length; i++) {
+                str += `<li>${taskList[i].id}  ${taskList[i].work}</li>`;
+            }
+            document.getElementById("taskList");
+            let task = {
+                id: idInput++,
+                work: inputTask.work
+            }
+        }
+        renderTask();
+
+    </script>
+</body>
+
+</html>
