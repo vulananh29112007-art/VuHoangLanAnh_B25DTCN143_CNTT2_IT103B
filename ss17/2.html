@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Công việc chuẩn bị Tết</title>
+    <link rel="stylesheet" href="2.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Công việc chuẩn bị Tết</h1>
+            <p>Click để đánh dấu hoàn thành</p>
+        </div>
+
+        <div id="todoList"></div>
+
+        <div class="footer">
+            Trạng thái được lưu tự động vào localStorage • Refresh để kiểm tra
+        </div>
+    </div>
+
+    <script>
+        const initialTodos = [
+            { id: 1, task: "Mua bánh chưng", done: true },
+            { id: 2, task: "Dọn nhà đón Tết", done: true },
+            { id: 3, task: "Gói bánh chưng", done: false },
+            { id: 4, task: "Trang trí nhà cửa bằng hoa mai, hoa đào", done: false },
+            { id: 5, task: "Mua phong bao lì xì", done: false },
+            { id: 6, task: "Chuẩn bị mâm ngũ quả", done: false },
+        ];
+
+        let todos = JSON.parse(localStorage.getItem("myTodos")) || initialTodos;
+
+        if (!localStorage.getItem("myTodos")) {
+            localStorage.setItem("myTodos", JSON.stringify(initialTodos));
+        }
+
+        const todoList = document.getElementById("todoList");
+
+        function renderTodos() {
+            todoList.innerHTML = "";
+
+            todos.forEach(todo => {
+                const item = document.createElement("div");
+                item.className = todo.done ? "todo-item done" : "todo-item";
+
+                item.innerHTML = `
+            <div class="circle">${todo.done ? "✓" : ""}</div>
+            <div class="task-text">${todo.task}</div>
+        `;
+
+                item.addEventListener("click", () => {
+                    todo.done = !todo.done;
+
+                    localStorage.setItem("myTodos", JSON.stringify(todos));
+
+                    renderTodos();
+                });
+
+                todoList.appendChild(item);
+            });
+        }
+
+        renderTodos();
+    </script>
+</body>
+
+</html>

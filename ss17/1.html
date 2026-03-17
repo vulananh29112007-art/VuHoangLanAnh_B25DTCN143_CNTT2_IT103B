@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Tết</title>
+    <link rel="stylesheet" href="1.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Chuẩn bị Tết Nguyên Đán</h1>
+            <p>Danh sách việc cần làm</p>
+        </div>
+
+        <div id="todoList"></div>
+
+        <div class="footer">
+            Đã lưu vào localStorage lần đầu tiên • Refresh trang để kiểm tra
+        </div>
+    </div>
+
+    <script>
+        const todos = [
+            { id: 1, task: "Mua bánh chưng", done: false },
+            { id: 2, task: "Dọn nhà đón Tết", done: false },
+            { id: 3, task: "Gói bánh chưng", done: false },
+            { id: 4, task: "Trang trí nhà cửa", done: false },
+        ];
+
+        const todoList = document.getElementById("todoList");
+
+        function renderTodos() {
+            todoList.innerHTML = "";
+
+            todos.forEach(todo => {
+                const item = document.createElement("div");
+                item.className = "todo-item";
+
+                item.innerHTML = `
+            <div class="task-left">
+                🌸 ${todo.task}
+            </div>
+            <div class="status">
+                ${todo.done ? "Đã làm" : "Chưa làm"}
+            </div>
+        `;
+
+                todoList.appendChild(item);
+            });
+        }
+
+        renderTodos();
+
+        if (!localStorage.getItem("myTodos")) {
+            localStorage.setItem("myTodos", JSON.stringify(todos));
+        }
+    </script>
+</body>
+
+</html>
