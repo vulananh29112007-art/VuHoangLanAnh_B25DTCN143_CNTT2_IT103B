@@ -9,5 +9,5 @@ let taskTextPassword = taskInputPassword.value.trim();
 cart.push(taskTextPassword);
 
 const taskInputAgainpassword = document.getElementById("againpassword");
-let taskTextAgainPassword = taskInputPassword.value.trim();
+let taskTextAgainPassword = taskInputAgainpassword.value.trim();
 cart.push(taskTextAgainPassword);
