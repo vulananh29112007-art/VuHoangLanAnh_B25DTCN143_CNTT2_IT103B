@@ -1,0 +1,93 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            background-color: aliceblue;
+            border-radius: 20px;
+            margin: 2px;
+            padding: 10px;
+            transition: all 0.25s;
+
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .product:hover {
+            transform: scale(1.1);
+            transition: all 0.25s;
+            border-color: rgb(232, 233, 233);
+            border: 1px dotted;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="product-form" action="">
+        <input type="text" id="Name" placeholder="Ten sp">
+        <input type="text" id="Price" placeholder="Gia tri">
+        <button type="submit" id="new-product" onclick="addNewProduct(event)">Them san pham</button>
+    </form>
+    <ul id="list">
+
+    </ul>
+</body>
+<script>
+    let productListElement = document.getElementById("list");
+    let inputProduct = document.getElementById("Name")
+    let PriceInput = document.getElementById("Price")
+    let addButton = document.getElementById("new-product");
+    let products = [
+        { id: 1, name: "Bao li xi", price: 250000 },
+        { id: 2, name: "Dua hau tet", price: 850000 },
+
+    ];
+
+    function renderProducts() {
+        productListElement.innerHTML = "";
+        products.forEach((product) => {
+            productListElement.innerHTML += `<li>
+        <div class = "product">
+            <p>Ten san pham - ${product.name}</p>
+            <p>Gia san pham - ${product.price}</p>
+            <button onClick ="DeleteProducts(${product.id})">Xoa</button>
+        </div>
+       </li>`
+        })
+    }
+
+
+    function addNewProduct(event) {
+        event.preventDefault();
+        let productInputValue = inputProduct.value
+        let PriceInputValue = PriceInput.value
+
+
+        let newProduct = {
+            id: products.length !== 0 ? products[products.length - 1].id + 1 : 1,
+            name: productInputValue,
+            price: PriceInputValue,
+        };
+        alert(newProduct.id)
+        products.push(newProduct)
+        inputProduct.value = "";
+        PriceInput.value = "";
+        renderProducts()
+    }
+
+
+    function DeleteProducts(id) {
+        alert("Xoa san pham" + id);
+        products = products.filter((product) => product.id !== id);
+        renderProducts()
+    }
+    document.addEventListener("DOMContentLoaded", renderProducts)
+
+</script>
+
+</html>
