@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Todo list</h1>
+
+    <!--Phần nhập liệu-->
+    <form action="" class="todo-form">
+        <div>
+            <input type="text" placeholder="Nhập công việc" id="todoInput">
+            <p class="err-mssg">Dữ liệu nhập vào không hợp lệ</p>
+        </div>
+        <input type="date" name="" id="todoDeadline">
+        <select name="" id="todoStatus">
+            <option value="">Trạng thái công việc</option>
+            <option value="To do">To do</option>
+            <option value="Pending">Pending</option>
+            <option value="Done">done</option>
+        </select>
+        <button onclick="addTodo(event)">Thêm công việc</button>
+    </form>
+    <br>
+    <!--Phần chức năng ngoài(tìm kiếm, sắp xếp, lọc)-->
+    <div>
+        <input type="text" placeholder="Nhập công việc cần tìm kiếm" id="findTodo" oninput="findTodoByName()">
+        <!-- <button onclick="findTodoByName()">Tìm kiếm</button> -->
+        <select name="" id="" onchange="filterTodoByStatus()">
+            <option value="">Lọc theo trạng thái</option>
+            <option value="To do">To do</option>
+            <option value="Pending">Pending</option>
+            <option value="Done">Done</option>
+        </select>
+    </div>
+    <br>
+    <!--phần hiển thị-->
+    <table style="width: 500px;">
+        <tr>
+            <th>Id</th>
+            <th>To do<button onclick="sortTodoByName()">Tăng dần</button></th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="todoList">
+
+        </tbody>
+
+    </table>
+</body>
+<script src="script.js"></script>
+
+</html>
